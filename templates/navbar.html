@@ -1,33 +1,29 @@
-{% load static %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'bmr' %}">{{request.user.username}}</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'bmr' %}">B.M.R</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'calorieInfo' %}">CalorieInfo</a>
-        </li>
-        <li class="nav-item">
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'addCalorie' %}">addCalorie</a>
-        </li> -->
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'userInfo' %}">UserInfo</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'editUserInfo' %}">EditUserInfo</a>
-        </li> -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'user_logout' %}">Logout</a>
-        </li>
-      </ul>
+<nav class="custom-nav">
+    <div class="nav-left"></div>
+    <div class="nav-center">
+        <a class="nav-brand-title" href="{% url 'bmr' %}">CalorieMeter</a>
     </div>
-  </div>
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'user_logout' %}" class="btn-logout">Logout</a>
+        {% endif %}
+    </div>
 </nav>
+
+<style>
+    .custom-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        background-color: transparent;
+        border-bottom: 1px solid #e9ecef;
+        margin-bottom: 30px;
+    }
+    .nav-left, .nav-right { flex: 1; display: flex; align-items: center; }
+    .nav-right { justify-content: flex-end; }
+    .nav-center { flex: 2; text-align: center; }
+    .nav-brand-title { color: #198754; font-weight: 800; font-size: 1.6rem; text-decoration: none; }
+    .btn-logout { text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 16px; border-radius: 6px; color: #ffffff; background-color: #dc3545; }
+    .btn-logout:hover { background-color: #bb2d3b; }
+</style>

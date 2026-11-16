@@ -1,51 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <h4 style="margin-top:0; color:#495057;">Summary Tracker</h4>
+            <hr>
+            {% if none_msg %}
+                <div class="alert alert-warning">{{ none_msg }}</div>
+                <a href="{% url 'editUserInfo' %}" class="btn-outline-primary">Setup Metrics</a>
+            {% else %}
+                <p>Target BMR: <strong>{{ bmr|floatformat:0 }} kcal</strong></p>
+                <p>Consumed Today: <strong>{{ total_calorie }} kcal</strong></p>
+                <div class="alert alert-info text-center fw-medium">{{ msg }}</div>
+            {% endif %}
+        </div>
+        <a href="{% url 'addCalorie' %}" class="btn-success" style="margin-top:20px;">+ Add New Food</a>
+    </div>
 
-<div class="container container-center">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div class="col-md-8">
+        <div class="card">
+            <h4 style="margin-top:0; color:#495057;">Today's Meals</h4>
             <table class="table">
-
-                <tr>
-                    <th>B.M.R</th>
-                    <th>Guidline</th>
-                </tr>
-                <tr>
-                    <td>{{ bmr }}</td>
-                    {% if msg is not None %}
-                    <td>{{ msg }}</td>
-                    {% else %}
-                    <td>{{none_msg}}</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <th>Calorie Intake Today</th>
-                </tr>
-                <tr>
-                    <td>{{total_calorie}}</td>
-                </tr>
-            </table>
-            <h4 class="mt-4">Today's Consumed Items</h4>
-
-            <table class="table">
-                <tr>
-                    <th>Item Name</th>
-                    <th>Calories Consumed</th>
-                </tr>
-                {% for item in daily_items %}
-                <tr>
-                    {% if item.Item_Name != None and item.Calorie_Consumed != None %}
-                    <td>{{ item.Item_Name }}</td>
-                    <td>{{ item.Calorie_Consumed }}</td>
-                    {% else %}
-                    <center><td colspan="2">No calorie items added today.</td></center>
-                    {% endif %}
-                </tr>                
-                {% endfor %}
+                <thead>
+                    <tr>
+                        <th>Food Item Name</th>
+                        <th class="text-end">Calories</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in daily_items %}
+                    <tr>
+                        <td>{{ item.Item_Name }}</td>
+                        <td class="text-end text-success" style="font-weight:bold;">{{ item.Calorie_Consumed }} kcal</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center text-muted" style="padding:20px;">No meals logged today yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>
 </div>
-
 {% endblock %}

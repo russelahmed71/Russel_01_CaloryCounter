@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container container-center">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form method="POST" >
-                <h2>Edit Calorie Information</h2><br>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card bg-white">
+            <h3 class="text-center text-success mb-2">Log Food Item</h3>
+            <p class="text-center text-muted small">Input food metrics into your form fields below.</p>
+            <hr>
+            
+            <form method="POST" action="{% url 'addCalorie' %}">
                 {% csrf_token %}
-                {{form.as_p}}
-                <br>
                 
-                <input class="btn btn-success" type="submit" value="Add">
-            </form> 
+                <div class="mb-3">
+                    <label class="form-label mb-1">Food Item Name</label>
+                    <input type="text" name="Item_Name" required placeholder="e.g., Rice, Egg, Apple">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label mb-1">Calories Contributed</label>
+                    <input type="number" name="Calorie_Consumed" required placeholder="e.g., 250">
+                </div>
+                
+                <button type="submit" class="btn-success">Log to Dashboard</button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <a href="{% url 'bmr' %}" class="text-decoration-none small text-muted">Changed your mind? <span style="color: #6c757d; font-weight: 600;">Go back here.</span></a>
+            </div>
         </div>
     </div>
 </div>

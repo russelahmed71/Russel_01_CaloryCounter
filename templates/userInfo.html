@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<br><br>
-<div class="container container-center">
-    <div class="card border-none " style="max-width: 50rem;">
-        <div class="card-body text-primary">
-            <h5 class="card-title">User Informations</h5>
-            <p class="card-text">Username : {{request.user.userinfo.Name}}</p>
-            <p class="card-text">Age : {{request.user.userinfo.Age}}</p>
-            <p class="card-text">Gender Number : {{request.user.userinfo.Gender}}</p>
-            <p class="card-text">Height Email : {{request.user.userinfo.Height}}</p>
-            <p class="card-text">Weight : {{request.user.userinfo.Weight}}</p>
-            <p class="card-text">B.M.R : {{request.user.userinfo.bmr}}</p>
-            <br><br>
-            <a href="{% url 'editUserInfo' %}" class="btn btn-primary">Update</a>
-            <br>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card">
+            <h3 class="text-center mb-2">My Profile Metrics</h3>
+            <hr>
+            <div style="margin-bottom: 12px;">Gender: <strong>{{ user.userinfo.Gender|default:"Not Set" }}</strong></div>
+            <div style="margin-bottom: 12px;">Age: <strong>{{ user.userinfo.Age|default:"Not Set" }} years</strong></div>
+            <div style="margin-bottom: 12px;">Height: <strong>{{ user.userinfo.Height|default:"Not Set" }} cm</strong></div>
+            <div style="margin-bottom: 12px;">Weight: <strong>{{ user.userinfo.Weight|default:"Not Set" }} kg</strong></div>
+            
+            <div style="background-color:#eef2f7; padding:12px; border-radius:6px; text-align:center; font-weight:bold; color:#0d6efd; margin:20px 0;">
+                Calculated BMR: {{ user.userinfo.bmr|default_if_none:"0"|floatformat:0 }} kcal
+            </div>
+            
+            <!-- 🔵 Blue Edit Button -->
+            <a href="{% url 'editUserInfo' %}" style="background-color:#0d6efd; color:white; text-decoration:none; text-align:center; display:block; padding:10px; border-radius:6px; margin-bottom:10px; font-weight:bold;">Edit Metrics</a>
+            
+            <!-- 🔘 NEW: Grey Dashboard Button -->
+            <a href="{% url 'bmr' %}" style="background-color:#6c757d; color:white; text-decoration:none; text-align:center; display:block; padding:10px; border-radius:6px; font-weight:bold;">Back to Dashboard</a>
         </div>
     </div>
 </div>

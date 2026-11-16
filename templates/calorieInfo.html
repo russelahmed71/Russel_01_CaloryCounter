@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<br><br>
-<div class="container container-center">
-    <div class="card border-none " style="max-width: 50rem;">
-        <div class="card-body text-primary">
-            <h5 class="card-title">Calorie Informations</h5>
-            <p class="card-text">Total Calorie Consumed : {{total_calory}}</p>
-            
-            <br><br>
-            <a href="{% url 'addCalorie' %}" class="btn btn-primary">Update</a>
-            <br>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card text-center">
+            <h3 class="mb-2">Total Calorie Ledger</h3>
+            <hr>
+            <p class="text-muted small">Overall historical calorie metrics logs.</p>
+            <h1 style="color:#198754; font-size:3rem; margin:15px 0;">{{ total_calory }} <span style="font-size:1rem; color:#6c757d;">kcal</span></h1>
+            <a href="{% url 'bmr' %}" class="btn-outline-primary" style="margin-top:10px;">Back to Dashboard</a>
         </div>
     </div>
 </div>

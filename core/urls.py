@@ -14,10 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# core/urls.py
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include  # <-- Remember to import 'include' here!
 
 urlpatterns = [
+    # 1. The default Django admin dashboard website
     path('admin/', admin.site.urls),
-    path('',include('myapp.urls'))
+    
+    # 2. Hand over everything else to your 'calory' application urls file
+    path('', include('calory.urls')),
 ]
+
